@@ -1,8 +1,8 @@
 package clone.library.presentation.reservation;
 
 import clone.library.application.scenario.ReservationScenario;
-import clone.library.domain.model.material.entry.Keyword;
-import clone.library.presentation.reservation.response.EntrySearchResponse;
+import clone.library.domain.model.material.entry.EntryNumber;
+import clone.library.presentation.reservation.response.EntryResponse;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +14,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 所蔵品目の検索
+ * 予約の登録
  */
-@RestController
-@RequestMapping("reservation/entries")
 @Slf4j
-public class EntitySearchController {
+@RestController
+@RequestMapping("reservation/register")
+public class ReservationController {
 
     ReservationScenario reservationScenario;
 
     @Autowired
-    EntitySearchController(ReservationScenario reservationScenario) {
+    ReservationController(ReservationScenario reservationScenario) {
         this.reservationScenario = reservationScenario;
     }
 
-    @GetMapping("/search/{keyword}")
-    public ResponseEntity<Object> search(@PathVariable final Keyword keyword) {
-        log.info("entryName:{}", keyword);
-        val body = reservationScenario.search(keyword);
-        return ResponseEntity.status(HttpStatus.OK).body(new EntrySearchResponse(body));
+    @GetMapping("/{entryNumber}")
+    ResponseEntity<Object> reservationForm(@PathVariable final EntryNumber entryNumber) {
+        log.info("entryNumber:{}", entryNumber);
+
+        val entry = reservationScenario.findMaterial(entryNumber);
+        return ResponseEntity.status(HttpStatus.OK).body(new EntryResponse(entry));
     }
+
+
 }

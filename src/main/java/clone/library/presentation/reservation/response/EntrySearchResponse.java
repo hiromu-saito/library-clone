@@ -1,4 +1,4 @@
-package clone.library.presentation.reservation;
+package clone.library.presentation.reservation.response;
 
 import clone.library.domain.model.material.entry.Entries;
 import clone.library.domain.model.material.entry.Entry;
@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 @Getter
 @JsonNaming
-public class EntriesResponse {
+public class EntrySearchResponse {
 
     List<EntryResponse> entryResponseList;
 
-    public EntriesResponse(Entries entries) {
+    public EntrySearchResponse(Entries entries) {
         entryResponseList = entries.getList().stream()
                 .map(EntryResponse::new)
                 .collect(Collectors.toList());
@@ -36,8 +36,5 @@ public class EntriesResponse {
             entryType = entry.getEntryType().value();
             stockQuantity = entry.getStockQuantity().value();
         }
-
     }
-
-
 }
