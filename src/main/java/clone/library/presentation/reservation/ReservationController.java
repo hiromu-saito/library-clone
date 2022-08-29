@@ -3,6 +3,7 @@ package clone.library.presentation.reservation;
 import clone.library.application.scenario.ReservationScenario;
 import clone.library.domain.model.material.entry.EntryNumber;
 import clone.library.domain.model.reservation.ReservationRequest;
+import clone.library.presentation.reservation.request.RegisterRequest;
 import clone.library.presentation.reservation.response.EntryResponse;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -37,7 +38,7 @@ public class ReservationController {
     @PostMapping
     String register(@RequestBody RegisterRequest body) {
         log.info("body:{}", body);
-        val reservationRequest = new ReservationRequest(body.memberNumber, body.entryNumber);
+        val reservationRequest = new ReservationRequest(body.getMemberNumber(), body.getEntryNumber());
 
         reservationScenario.reserve(reservationRequest);
         return "test";

@@ -2,8 +2,9 @@ package clone.library.domain.model.reservation;
 
 import clone.library.domain.model.material.entry.EntryNumber;
 import clone.library.domain.model.member.MemberNumber;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-
+@JsonNaming
 public class ReservationRequest {
 
     MemberNumber memberNumber;

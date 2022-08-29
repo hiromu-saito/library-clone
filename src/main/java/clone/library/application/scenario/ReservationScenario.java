@@ -1,11 +1,13 @@
 package clone.library.application.scenario;
 
 import clone.library.application.service.material.MaterialQueryService;
+import clone.library.application.service.member.MemberQueryService;
 import clone.library.application.service.reservation.ReservationRecordService;
 import clone.library.domain.model.material.entry.Entries;
 import clone.library.domain.model.material.entry.Entry;
 import clone.library.domain.model.material.entry.EntryNumber;
 import clone.library.domain.model.material.entry.Keyword;
+import clone.library.domain.model.member.MemberStatus;
 import clone.library.domain.model.reservation.ReservationRequest;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -20,11 +22,16 @@ import org.springframework.stereotype.Service;
 public class ReservationScenario {
     MaterialQueryService materialQueryService;
     ReservationRecordService reservationRecordService;
+    MemberQueryService memberQueryService;
 
     @Autowired
-    ReservationScenario(MaterialQueryService materialQueryService, ReservationRecordService reservationRecordService) {
+    ReservationScenario(
+            MaterialQueryService materialQueryService,
+            ReservationRecordService reservationRecordService,
+            MemberQueryService memberQueryService) {
         this.materialQueryService = materialQueryService;
         this.reservationRecordService = reservationRecordService;
+        this.memberQueryService = memberQueryService;
     }
 
     /**
@@ -56,6 +63,11 @@ public class ReservationScenario {
             // TODO　例外処理
             return new RuntimeException();
         });
+
+        val memberStatus = memberQueryService.status(reservationRequest.memberNumber());
+        if (memberStatus != MemberStatus.VALID) {
+            log.warn("有効な会員が存在しません。会員番号={}", reservationRequest.memberNumber().value());
+        }
 
         reservationRecordService.reserve(reservationRequest);
     }

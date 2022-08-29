@@ -1,15 +1,13 @@
-package clone.library.presentation.reservation;
+package clone.library.presentation.reservation.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
-import lombok.ToString;
 
 @JsonNaming
 @Getter
-@ToString
 public class RegisterRequest {
 
-    int entryNumber;
+    private int entryNumber;
 
-    int memberNumber;
+    private int memberNumber;
 }

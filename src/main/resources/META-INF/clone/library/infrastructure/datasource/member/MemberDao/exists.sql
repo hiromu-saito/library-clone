@@ -1,0 +1,1 @@
+select exists ( select 会員番号 from 会員 where 会員番号 = /* memberNumber */1);
