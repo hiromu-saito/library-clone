@@ -1,0 +1,1 @@
+insert into 予約 (予約番号,所蔵品目番号) values ( /* reservationNumber */1, /* entryNumber */2);

@@ -1,0 +1,1 @@
+select ifnull(max(予約番号) + 1, 1) from 予約;
