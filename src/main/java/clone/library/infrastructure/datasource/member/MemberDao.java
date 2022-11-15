@@ -16,4 +16,6 @@ public interface MemberDao {
 
     @Select
     boolean exists(final MemberNumber memberNumber);
+    //firstcommit
+    //firstcommit
 }
