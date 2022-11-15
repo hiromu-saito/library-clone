@@ -18,4 +18,5 @@ public interface MemberDao {
     boolean exists(final MemberNumber memberNumber);
     //firstcommit
     //firstcommit
+    //secondcommit
 }
