@@ -7,7 +7,7 @@ import org.seasar.doma.Domain;
  * <p>
  * 図書と視聴覚資料(DVD等)ごとに貸出可能数が異なる
  */
-
+//develop commit
 @Domain(valueType = String.class, factoryMethod = "of", accessorMethod = "value")
 public enum EntryType {
     BOOK("0", "図書"),
